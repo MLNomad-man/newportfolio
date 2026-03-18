@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Md Meraj Ansari | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-color: #000000;
+            --text-color: #E0E0E0;
+            --text-muted-color: #9CA3AF;
+            --card-bg: rgba(18, 18, 18, 0.7);
+            --header-bg: rgba(18, 18, 18, 0.7);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --section-bg: rgba(0, 0, 0, 0.2);
+            --section-title-gradient-end: #000;
+            --button-border: #4A4A4A;
+        }
+
+        html.light {
+            --bg-color: #F9FAFB;
+            --text-color: #1F2937;
+            --text-muted-color: #4B5563;
+            --card-bg: rgba(255, 255, 255, 0.7);
+            --header-bg: rgba(255, 255, 255, 0.7);
+            --border-color: rgba(0, 0, 0, 0.1);
+            --section-bg: rgba(243, 244, 246, 0.7);
+            --section-title-gradient-end: #F9FAFB;
+            --button-border: #D1D5DB;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
+            /* Animated blob background */
+            background-color: #000000;
+        }
+        
+        /* Animated blob background */
+        .blob-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .blob-svg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+        }
+        
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .out-top {
+            animation: rotate 20s linear infinite;
+            transform-origin: 13px 25px;
+        }
+        
+        .in-top {
+            animation: rotate 10s linear infinite;
+            transform-origin: 13px 25px;
+        }
+        
+        .out-bottom {
+            animation: rotate 25s linear infinite;
+            transform-origin: 84px 93px;
+        }
+        
+        .in-bottom {
+            animation: rotate 15s linear infinite;
+            transform-origin: 84px 93px;
+        }
+        
+        /* Light theme blob colors */
+        html.light body {
+            background-color: #fee440;
+        }
+        .purple-accent {
+            color: #8B5CF6;
+        }
+        .purple-bg {
+            background-color: #8B5CF6;
+        }
+        .purple-border {
+            border-color: #8B5CF6;
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #8B5CF6;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #8B5CF6;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(90deg, #8B5CF6, var(--section-title-gradient-end));
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--text-muted-color);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #8B5CF6;
+        }
+        .scroll-reveal, .stagger-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .scroll-reveal.visible, .stagger-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .hero-animate {
+            opacity: 0;
+            animation: fadeInUp 0.7s ease-out forwards;
+        }
+        .stagger-reveal.visible > *:nth-child(1) { transition-delay: 0.1s; }
+        .stagger-reveal.visible > *:nth-child(2) { transition-delay: 0.2s; }
+        .stagger-reveal.visible > *:nth-child(3) { transition-delay: 0.3s; }
+        .stagger-reveal.visible > *:nth-child(4) { transition-delay: 0.4s; }
+        .stagger-reveal.visible > *:nth-child(5) { transition-delay: 0.5s; }
+
+        .bordered-button {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--text-color);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+            border: 2px solid var(--button-border);
+        }
+        .bordered-button:hover {
+            border-color: #8B5CF6;
+            color: #8B5CF6;
+            background-color: rgba(139, 92, 246, 0.1);
+        }
+
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+        }
+        
+        .text-gradient {
+            background: linear-gradient(90deg, #A774F2, #62A0F2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+        
+        #header {
+            background: var(--header-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            transition: background-color 0.3s ease;
+        }
+
+        .profile-image {
+            transition: box-shadow 0.4s ease-in-out;
+            cursor: pointer;
+        }
+        .profile-image:hover {
+            box-shadow: 0 0 45px 5px rgba(139, 92, 246, 0.6);
+        }
+
+        .progress-value {
+            transition: width 1s ease-in-out;
+        }
+        .progress-bar-container .progress-value {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        .green-glass-card {
+            background: rgba(16, 24, 22, 0.7);
+            border-color: rgba(34, 197, 94, 0.2);
+        }
+        
+        .section-bg {
+            background-color: var(--section-bg);
+            transition: background-color 0.3s ease;
+        }
+
+        .text-muted {
+            color: var(--text-muted-color);
+        }
+        .text-primary {
+            color: var(--text-color);
+        }
+        
+        /* Image modal styles */
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            max-height: 80%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 10px;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        
+        .close-modal:hover,
+        .close-modal:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        @keyframes backgroundShift {
+            0% {
+                background-position: 0% 0%;
+            }
+            100% {
+                background-position: 100% 100%;
+            }
+        }
+        
+        /* Geometric background elements */
+        .geo-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .geo-shape {
+            position: absolute;
+            opacity: 0.05;
+            background: #8B5CF6;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+        }
+        
+        .geo-triangle {
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+        
+        .geo-circle {
+            border-radius: 50%;
+        }
+        
+        .geo-hexagon {
+            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+        }
+        
+        /* Removed constellation background styles */
+        
+        .back-button {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #8B5CF6;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        
+        .back-button:hover {
+            background-color: #7C3AED;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Animated Blob Background -->
+    <div class="blob-container">
+        <svg class="blob-svg" preserveAspectRatio="xMidYMid slice" viewBox="10 10 80 80">
+            <path fill="#9b5de5" class="out-top" d="M37-5C25.1-14.7,5.7-19.1-9.2-10-28.5,1.8-32.7,31.1-19.8,49c15.5,21.5,52.6,22,67.2,2.3C59.4,35,53.7,8.5,37-5Z"/>
+            <path fill="#f15bb5" class="in-top" d="M20.6,4.1C11.6,1.5-1.9,2.5-8,11.2-16.3,23.1-8.2,45.6,7.4,50S42.1,38.9,41,24.5C40.2,14.1,29.4,6.6,20.6,4.1Z"/>
+            <path fill="#00bbf9" class="out-bottom" d="M105.9,48.6c-12.4-8.2-29.3-4.8-39.4.8-23.4,12.8-37.7,51.9-19.1,74.1s63.9,15.3,76-5.6c7.6-13.3,1.8-31.1-2.3-43.8C117.6,63.3,114.7,54.3,105.9,48.6Z"/>
+            <path fill="#00f5d4" class="in-bottom" d="M102,67.1c-9.6-6.1-22-3.1-29.5,2-15.4,10.7-19.6,37.5-7.6,47.8s35.9,3.9,44.5-12.5C115.5,92.6,113.9,74.6,102,67.1Z"/>
+        </svg>
+    </div>
+
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="#" class="text-xl font-bold whitespace-nowrap mr-6">Md Meraj Ansari</a>
+                <div class="flex items-center">
+                    <nav class="hidden md:flex items-center space-x-6">
+                        <a href="#about" class="nav-link text-sm">About</a>
+                        <a href="#skills" class="nav-link text-sm">Skills</a>
+                        <a href="#experience" class="nav-link text-sm">Experience</a>
+                        <a href="#achievements" class="nav-link text-sm">Achievements</a>
+                        <a href="#projects" class="nav-link text-sm">Projects</a>
+                        <a href="#demos" class="nav-link text-sm">Demos</a>
+                        <a href="#certifications" class="nav-link text-sm">Certs</a>
+                        <a href="#contact" class="nav-link text-sm">Contact</a>
+                    </nav>
+                    <button id="theme-toggle" class="ml-6 text-muted transition-colors">
+                        <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                        <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class=""><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    </button>
+                    <button id="mobile-menu-button" class="md:hidden ml-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-black bg-opacity-80 backdrop-blur-sm">
+            <a href="#about" class="block py-2 px-4 text-sm hover:bg-gray-700">About</a>
+            <a href="#skills" class="block py-2 px-4 text-sm hover:bg-gray-700">Skills</a>
+            <a href="#experience" class="block py-2 px-4 text-sm hover:bg-gray-700">Experience</a>
+            <a href="#achievements" class="block py-2 px-4 text-sm hover:bg-gray-700">Achievements</a>
+            <a href="#projects" class="block py-2 px-4 text-sm hover:bg-gray-700">Projects</a>
+            <a href="#demos" class="block py-2 px-4 text-sm hover:bg-gray-700">Demos</a>
+            <a href="#certifications" class="block py-2 px-4 text-sm hover:bg-gray-700">Certs</a>
+            <a href="#contact" class="block py-2 px-4 text-sm hover:bg-gray-700">Contact</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="min-h-screen flex flex-col items-center justify-center text-center px-6 pt-24">
+             <img src="./profile.jpg" alt="MD Meraj Ansari" class="profile-image rounded-full w-64 h-64 mb-8 border-4 purple-border shadow-lg hero-animate" style="animation-delay: 0.2s;">
+            <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-4 hero-animate text-gradient" style="animation-delay: 0.4s;">
+                Innovator & Tech Enthusiast
+            </h1>
+            <p class="text-lg md:text-xl mb-10 text-muted hero-animate" style="animation-delay: 0.6s;">
+                B.Tech Student at Symbiosis Institute of Technology | Aspiring Innovator Specialist
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 hero-animate" style="animation-delay: 0.8s;">
+                <a href="#projects" class="bordered-button">View My Work</a>
+                <a href="meraj resume.pdf" download class="bordered-button">Download Resume</a>
+                <a href="#contact" class="bordered-button">Contact Me</a>
+            </div>
+        </section>
+
+        <section id="about" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-10">
+                    <h2 class="text-4xl font-bold section-title scroll-reveal visible">About Me</h2>
+                </div>
+                <div class="max-w-4xl mx-auto glass-card p-8 md:p-10 scroll-reveal">
+                     <p class="text-lg text-muted leading-relaxed text-center">
+                        A dedicated and innovative second-year B.Tech student at Symbiosis Institute of Technology with a strong foundation in programming and a passion for leveraging technology for societal benefit. Proven ability to lead and collaborate through roles in student clubs and event management. Eager to apply a problem-solving mindset and technical skills to real-world challenges in the tech industry.
+                     </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="py-20 section-bg">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-10">
+                    <h2 class="text-4xl font-bold section-title scroll-reveal visible">Technical Skills</h2>
+                </div>
+                <div class="max-w-4xl mx-auto glass-card p-8 md:p-10 scroll-reveal">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+                        <div class="space-y-4">
+                            <h3 class="text-xl font-bold">Languages</h3>
+                            <div class="space-y-3 progress-bar-container">
+                                <p class="flex justify-between text-sm"><span>Python</span> <span>90%</span></p>
+                                <div class="w-full bg-gray-700 rounded-full h-3"><div class="bg-blue-500 h-3 rounded-full progress-value" style="width: 0%" data-width="90%"></div></div>
+                                <p class="flex justify-between text-sm"><span>C</span> <span>85%</span></p>
+                                <div class="w-full bg-gray-700 rounded-full h-3"><div class="bg-green-500 h-3 rounded-full progress-value" style="width: 0%" data-width="85%"></div></div>
+                                <p class="flex justify-between text-sm"><span>R</span> <span>80%</span></p>
+                                <div class="w-full bg-gray-700 rounded-full h-3"><div class="bg-purple-500 h-3 rounded-full progress-value" style="width: 0%" data-width="80%"></div></div>
+                                <p class="flex justify-between text-sm"><span>Java</span> <span>50%</span></p>
+                                <div class="w-full bg-gray-700 rounded-full h-3"><div class="bg-orange-500 h-3 rounded-full progress-value" style="width: 0%" data-width="50%"></div></div>
+                                <p class="flex justify-between text-sm"><span>HTML & CSS</span> <span>55%</span></p>
+                                <div class="w-full bg-gray-700 rounded-full h-3"><div class="bg-pink-500 h-3 rounded-full progress-value" style="width: 0%" data-width="55%"></div></div>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <h3 class="text-xl font-bold">Libraries & Frameworks</h3>
+                            <div class="space-y-3 progress-bar-container">
+                                <p class="flex justify-between text-sm"><span>NumPy & Pandas</span> <span>85%</span></p>
+                                <div class="w-full bg-gray-700 rounded-full h-3"><div class="bg-cyan-500 h-3 rounded-full progress-value" style="width: 0%" data-width="85%"></div></div>
+                                <p class="flex justify-between text-sm"><span>Matplotlib & Seaborn</span> <span>80%</span></p>
+                                <div class="w-full bg-gray-700 rounded-full h-3"><div class="bg-indigo-500 h-3 rounded-full progress-value" style="width: 0%" data-width="80%"></div></div>
+                                <p class="flex justify-between text-sm"><span>OpenCV</span> <span>80%</span></p>
+                                <div class="w-full bg-gray-700 rounded-full h-3"><div class="bg-red-500 h-3 rounded-full progress-value" style="width: 0%" data-width="80%"></div></div>
+                                <p class="flex justify-between text-sm"><span>FastAPI</span> <span>75%</span></p>
+                                <div class="w-full bg-gray-700 rounded-full h-3"><div class="bg-yellow-500 h-3 rounded-full progress-value" style="width: 0%" data-width="75%"></div></div>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <h3 class="text-xl font-bold">Tools & Platforms</h3>
+                            <div class="space-y-3 progress-bar-container">
+                                <p class="flex justify-between text-sm"><span>Google Cloud</span> <span>80%</span></p>
+                                <div class="w-full bg-gray-700 rounded-full h-3"><div class="bg-green-400 h-3 rounded-full progress-value" style="width: 0%" data-width="80%"></div></div>
+                                <p class="flex justify-between text-sm"><span>IoT Development</span> <span>85%</span></p>
+                                <div class="w-full bg-gray-700 rounded-full h-3"><div class="bg-purple-400 h-3 rounded-full progress-value" style="width: 0%" data-width="85%"></div></div>
+                                <p class="flex justify-between text-sm"><span>Blockchain (Algorand)</span> <span>54%</span></p>
+                                <div class="w-full bg-gray-700 rounded-full h-3"><div class="bg-red-400 h-3 rounded-full progress-value" style="width: 0%" data-width="54%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-10">
+                    <h2 class="text-4xl font-bold section-title scroll-reveal visible">Experience & Leadership</h2>
+                </div>
+                <div class="space-y-8 max-w-4xl mx-auto stagger-reveal">
+                    <div class="flex items-start gap-4 p-6 rounded-lg glass-card">
+                        <div class="p-3 rounded-lg bg-yellow-500 bg-opacity-20">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-yellow-400"><path d="M12 2.69l.346.666L13.38 5.31l2.12.308 1.53 1.53.308 2.12.666.346L19.31 12l-.666.346L16.69 13.38l-.308 2.12-1.53 1.53-2.12.308-.346.666L12 19.31l-.346-.666L10.62 16.69l-2.12-.308-1.53-1.53-.308-2.12-.666-.346L4.69 12l.666-.346L7.31 10.62l.308-2.12 1.53-1.53 2.12-.308.346-.666z"/><path d="M12 7v2l2 1"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold purple-accent">Chair, IEEE Industry Applications Society (IAS)</h3>
+                            <p class="text-muted mb-2">Symbiosis Institute of Technology, Hyderabad</p>
+                            <ul class="list-disc list-inside text-muted space-y-1">
+                                <li>Lead the student branch chapter, organizing technical events, workshops, and seminars.</li>
+                                <li>Promote student membership and engagement in IEEE activities.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 p-6 rounded-lg glass-card">
+                        <div class="p-3 rounded-lg bg-cyan-500 bg-opacity-20">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-cyan-400"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold purple-accent">Co-Lead, Algorand Blockchain Club</h3>
+                            <p class="text-muted mb-2">Symbiosis Institute of Technology, Hyderabad</p>
+                             <ul class="list-disc list-inside text-muted space-y-1">
+                                <li>Co-led the student-run blockchain club, fostering a learning environment.</li>
+                                <li>Conducted technical workshops on Algorand Blockchain.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 p-6 rounded-lg glass-card">
+                        <div class="p-3 rounded-lg bg-pink-500 bg-opacity-20">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-pink-400"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold purple-accent">Event Coordinator, ANVESHAN</h3>
+                            <p class="text-muted mb-2">Symbiosis Institute of Technology, Hyderabad</p>
+                             <ul class="list-disc list-inside text-muted space-y-1">
+                                <li>Managed coordination for ANVESHAN, the flagship event of the institute.</li>
+                                <li>Demonstrated strong organizational and teamwork skills.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="achievements" class="py-20 section-bg">
+            <div class="container mx-auto px-6 space-y-16">
+                <div class="glass-card p-8 scroll-reveal">
+                    <h2 class="text-3xl font-bold text-center mb-10 section-title scroll-reveal visible">Event Coordination & Achievements</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div class="space-y-4">
+                            <h3 class="text-2xl font-bold purple-accent">ANVESHAN 2025 - Event Coordinator</h3>
+                            <p class="text-muted">Successfully coordinated ANVESHAN 2025, the annual technical fest of Symbiosis Institute of Technology, Hyderabad. Led a team to organize a diverse range of events including treasure hunts, neon parties, esports competitions, DJ nights, and many more engaging activities.</p>
+                            <ul class="list-disc list-inside space-y-1 text-muted">
+                                <li>Event Management & Team Leadership</li>
+                                <li>Strategic Planning & Execution</li>
+                                <li>Multi-Event Coordination</li>
+                                <li>Stakeholder Management</li>
+                            </ul>
+                        </div>
+                        <div class="space-y-4">
+                            <img src="./anveshan_1.jpg" alt="ANVESHAN 2025" class="rounded-lg w-full cursor-pointer hover:scale-105 transition-transform duration-300">
+                            <img src="./anveshan_2.jpg" alt="ANVESHAN 2025" class="rounded-lg w-full cursor-pointer hover:scale-105 transition-transform duration-300">
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-card p-8 scroll-reveal">
+                    <h2 class="text-3xl font-bold text-center mb-10 section-title scroll-reveal visible">College Induction & Achievements</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div class="space-y-4">
+                            <h3 class="text-2xl font-bold text-green-400">First Induction Program</h3>
+                            <p class="text-muted">Participated in the inaugural induction program of our college, marking the beginning of our academic journey at Symbiosis Institute of Technology, Hyderabad. This program introduced us to the college culture, academic expectations, and provided opportunities for team building and collaboration.</p>
+                             <ul class="list-disc list-inside space-y-1 text-muted">
+                                <li>College Orientation & Integration</li>
+                                <li>Team Building Activities</li>
+                                <li>Academic & Cultural Introduction</li>
+                                <li>Peer Networking & Collaboration</li>
+                            </ul>
+                             <div class="glass-card p-4 mt-6">
+                                <h4 class="font-bold text-lg text-green-400 flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M12.22 19.88a2.89 2.89 0 0 0 4.1 0l1.42-1.42a2.89 2.89 0 0 0 0-4.1L12 8.54l-5.72 5.72a2.89 2.89 0 0 0 0 4.1l1.42 1.42a2.89 2.89 0 0 0 4.1 0zM12 22l.71-.71a5.77 5.77 0 0 0 0-8.16L5.17 5.59a1 1 0 0 0-1.41 0l-.7.71a1 1 0 0 0 0 1.41L12 17.25l6.96-6.96a1 1 0 0 0 0-1.41l-.7-.71a1 1 0 0 0-1.41 0L12 14.83z"/></svg>Futsal Championship Victory</h4>
+                                <p class="text-sm mt-2 text-muted">Our team secured the <span class="font-bold text-primary">first prize in futsal</span> during the induction program, demonstrating excellent teamwork, strategic thinking, and competitive spirit.</p>
+                             </div>
+                        </div>
+                        <div class="space-y-4">
+                             <img src="./ind1.jpg" alt="Futsal Champions" class="rounded-lg w-full cursor-pointer hover:scale-105 transition-transform duration-300">
+                             <img src="./ind2.jpg" alt="Futsal Champions" class="rounded-lg w-full cursor-pointer hover:scale-105 transition-transform duration-300">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- IEEE Leadership & Engagement Section -->
+                <div class="glass-card p-8 scroll-reveal">
+                    <h2 class="text-3xl font-bold text-center mb-10 section-title scroll-reveal visible">IEEE Leadership & Engagement</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div class="space-y-4">
+                            <h3 class="text-2xl font-bold purple-accent">IEEE IAS Student Branch Chair</h3>
+                            <p class="text-muted mb-4">Symbiosis Institute of Technology, Hyderabad</p>
+                            
+                            <p class="text-muted mb-4">Serving as the Chair of the IEEE Industry Applications Society Student Branch Chapter at SIT Hyderabad. Leading initiatives in industry applications, organizing technical events, and fostering innovation among students in electrical and electronics engineering.</p>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                                <div class="flex items-start gap-2">
+                                    <div class="mt-1 w-2 h-2 rounded-full bg-purple-500"></div>
+                                    <p class="text-muted"><span class="font-semibold text-primary">Student Leadership & Management</span></p>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <div class="mt-1 w-2 h-2 rounded-full bg-purple-500"></div>
+                                    <p class="text-muted"><span class="font-semibold text-primary">Technical Event Organization</span></p>
+                                </div>
+                            </div>
+                            
+                            <div class="glass-card p-4 mt-6">
+                                <h4 class="font-bold text-lg text-blue-400 flex items-center gap-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+                                        <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/>
+                                        <path d="M8 12h8"/>
+                                        <path d="M8 8h8"/>
+                                        <path d="M8 16h4"/>
+                                    </svg>
+                                    Conference Participation
+                                </h4>
+                                <p class="text-sm mt-2 text-muted">Attended IEEE ICASP 2025-International Conference on Acoustics, Speech and Signal Processing, demonstrating commitment to staying current with cutting-edge research and industry developments.</p>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                                    <div class="rounded-lg overflow-hidden">
+                                        <img src="./ieee1.jpg" alt="IEEE Conference 1" class="w-full h-auto object-cover cursor-pointer hover:scale-105 transition-transform duration-300">
+                                    </div>
+                                    <div class="rounded-lg overflow-hidden">
+                                        <img src="./ieee2.jpg" alt="IEEE Conference 2" class="w-full h-auto object-cover cursor-pointer hover:scale-105 transition-transform duration-300">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <img src="./sb%20chair.jpg" alt="IEEE Student Branch Chair" class="rounded-lg w-full cursor-pointer hover:scale-105 transition-transform duration-300">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- AI Agent Development Section -->
+                <div class="glass-card p-8 scroll-reveal">
+                    <h2 class="text-3xl font-bold text-center mb-10 section-title scroll-reveal visible">AI Agent Development</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div class="space-y-4">
+                            <h3 class="text-2xl font-bold purple-accent">Salesforce Agentforce Platform</h3>
+                            <p class="text-muted mb-4">Successfully built my first AI agent using Salesforce Agentforce platform, demonstrating proficiency in AI development and enterprise solutions.</p>
+                            
+                            <div class="glass-card p-4 mt-6">
+                                <h4 class="font-bold text-lg text-blue-400 flex items-center gap-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                    </svg>
+                                    Powered by Salesforce
+                                </h4>
+                                <p class="text-sm mt-2 text-muted">Leveraged Salesforce's cutting-edge Agentforce platform to create intelligent AI solutions for enterprise applications.</p>
+                            </div>
+                        </div>
+                        <div class="space-y-4 flex justify-center">
+                            <img src="./agent.jpg" alt="AI Agent Development" class="rounded-lg w-full max-w-md h-auto object-cover cursor-pointer hover:scale-105 transition-transform duration-300">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass-card p-8 scroll-reveal">
+                    <h2 class="text-3xl font-bold text-center mb-10 section-title scroll-reveal visible">AlgoScape Event Participation</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div class="space-y-4">
+                            <h3 class="text-2xl font-bold text-blue-400">Blockchain Gaming Event</h3>
+                            <p class="text-muted">As the Head of the Algorand Club, I organized and led AlgoScape, an innovative blockchain event inspired by Squid Game that combined competitive gaming elements with cutting-edge decentralized technology. This creative event showcased smart contracts, Web3 applications, and blockchain technology through engaging challenges, demonstrating my leadership and innovative approach to tech education and community building.</p>
+                             <ul class="list-disc list-inside space-y-1 text-muted">
+                                <li>Squid Game-Inspired Event Design</li>
+                                <li>Competitive Gaming & Blockchain Integration</li>
+                                <li>Creative Tech Education & Engagement</li>
+                                <li>Innovative Community Building</li>
+                            </ul>
+                             <div class="glass-card p-4 mt-6">
+                                <h4 class="font-bold text-lg text-blue-400 flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>Event Highlights</h4>
+                                <p class="text-sm mt-2 text-muted">Successfully organized and led AlgoScape, a Squid Game-inspired blockchain event that provided participants with hands-on experience in Algorand's cutting-edge technology, smart contracts, DeFi, and Web3 applications through competitive and engaging challenges.</p>
+                             </div>
+                        </div>
+                        <div class="space-y-4">
+                            <img src="./algo1.jpg" alt="ALGOSCAPE Event" class="rounded-lg w-full cursor-pointer hover:scale-105 transition-transform duration-300">
+                            <img src="./algo2.jpg" alt="ALGOSCAPE Event" class="rounded-lg w-full cursor-pointer hover:scale-105 transition-transform duration-300">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hackathon Victory Section -->
+                <div class="glass-card p-8 scroll-reveal">
+                    <h2 class="text-3xl font-bold text-center mb-10 section-title scroll-reveal visible">Hackathon - 2025 Victory</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div class="space-y-4">
+                            <h3 class="text-2xl font-bold text-yellow-400">ECE Department Hackathon Winner - 1st Place</h3>
+                            <p class="text-muted">Won the prestigious Hackathon-2025 organized by the Department of ECE at KL University, Azizanagar Campus. Secured 1st place with a prize of ₹15,000 in a 24-hour challenge where hardware meets imagination.</p>
+                            <ul class="list-disc list-inside space-y-1 text-muted">
+                                <li>24 Hours Innovation Challenge</li>
+                                <li>Hardware & Software Integration</li>
+                                <li>Problem Solving Under Pressure</li>
+                                <li>Team Collaboration & Leadership</li>
+                            </ul>
+                            <div class="glass-card p-4 mt-6">
+                                <h4 class="font-bold text-lg text-yellow-400 flex items-center gap-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+                                        <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+                                        <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+                                        <path d="M4 22h16"/>
+                                        <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+                                        <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+                                        <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+                                    </svg>
+                                    Championship Achievement - 1st Place
+                                </h4>
+                                <p class="text-sm mt-2 text-muted">
+                                    <span class="font-bold text-primary">Event Date:</span> October 8, 2025<br>
+                                    <span class="font-bold text-primary">Prize Won:</span> ₹15,000 INR (1st Place)<br>
+                                    <span class="font-bold text-primary">Venue:</span> KL University, Azizanagar Campus
+                                </p>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <img src="./hackathon1.jpg" alt="Hackathon 2025 - Image 1" class="rounded-lg w-full h-72 object-contain bg-gray-900 cursor-pointer hover:scale-105 transition-transform duration-300 shadow-lg">
+                                <img src="./hackathon2.jpg" alt="Hackathon 2025 - Image 2" class="rounded-lg w-full h-72 object-contain bg-gray-900 cursor-pointer hover:scale-105 transition-transform duration-300 shadow-lg">
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <img src="./hackathon3.jpg" alt="Hackathon 2025 - Image 3" class="rounded-lg w-full h-72 object-contain bg-gray-900 cursor-pointer hover:scale-105 transition-transform duration-300 shadow-lg">
+                                <img src="./hackathon4.jpg" alt="Hackathon 2025 - Image 4" class="rounded-lg w-full h-72 object-contain bg-gray-900 cursor-pointer hover:scale-105 transition-transform duration-300 shadow-lg">
+                            </div>
+                            <div class="grid grid-cols-1">
+                                <img src="./hackathon5.jpg" alt="Hackathon 2025 - Image 5" class="rounded-lg w-full h-96 object-contain bg-gray-900 cursor-pointer hover:scale-105 transition-transform duration-300 shadow-lg">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-10">
+                    <h2 class="text-4xl font-bold section-title scroll-reveal visible">My Projects</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 stagger-reveal">
+                    <div class="glass-card p-6 flex flex-col h-full">
+                        <h3 class="text-xl font-bold mb-2 purple-accent">Obstacle-Avoiding Robot Car</h3>
+                        <p class="text-muted mb-4 text-sm flex-grow">This project showcases skills in hardware integration and real-time programming by creating an autonomous vehicle that uses ultrasonic sensors to intelligently navigate its environment.</p>
+                        <div class="flex flex-wrap gap-2 text-xs mb-4">
+                            <span class="bg-gray-700 px-2 py-1 rounded">Arduino</span><span class="bg-gray-700 px-2 py-1 rounded">C++</span><span class="bg-gray-700 px-2 py-1 rounded">Robotics</span>
+                        </div>
+                        <div class="flex justify-between items-center mt-auto">
+                            <a href="#" class="text-sm purple-accent font-semibold hover:underline">Live Demo</a><a href="https://github.com/MLNomad-man/Arduino-Obstacle-Avoiding-Robot-Car-4WD" class="text-sm text-muted hover:underline">View Code →</a>
+                        </div>
+                    </div>
+                    <div class="glass-card p-6 flex flex-col h-full">
+                        <h3 class="text-xl font-bold mb-2 purple-accent">AI Voice Assistant</h3>
+                        <p class="text-muted mb-4 text-sm flex-grow">Built to explore natural language processing, this assistant demonstrates the ability to integrate multiple Python libraries for speech recognition and task automation.</p>
+                        <div class="flex flex-wrap gap-2 text-xs mb-4">
+                            <span class="bg-gray-700 px-2 py-1 rounded">Python</span><span class="bg-gray-700 px-2 py-1 rounded">Speech Recognition</span>
+                        </div>
+                        <div class="flex justify-between items-center mt-auto">
+                            <a href="#" class="text-sm purple-accent font-semibold hover:underline">Live Demo</a><a href="https://github.com/MLNomad-man/Ai-Assistant-using-python" class="text-sm text-muted hover:underline">View Code →</a>
+                        </div>
+                    </div>
+                    <div class="glass-card p-6 flex flex-col h-full">
+                        <h3 class="text-xl font-bold mb-2 purple-accent">Sign Language Detection</h3>
+                        <p class="text-muted mb-4 text-sm flex-grow">Real-time Sign Language Recognition using YOLO with dataset prep, training pipeline, and inference scripts. Features end-to-end pipeline for data collection, labeling, training, validation, and deployment.</p>
+                        <div class="flex flex-wrap gap-2 text-xs mb-4">
+                            <span class="bg-gray-700 px-2 py-1 rounded">Python</span><span class="bg-gray-700 px-2 py-1 rounded">YOLO</span><span class="bg-gray-700 px-2 py-1 rounded">Computer Vision</span><span class="bg-gray-700 px-2 py-1 rounded">OpenCV</span>
+                        </div>
+                        <div class="flex justify-between items-center mt-auto">
+                            <a href="#" class="text-sm purple-accent font-semibold hover:underline">Live Demo</a><a href="https://github.com/MLNomad-man/sign-language-detection-" class="text-sm text-muted hover:underline">View Code →</a>
+                        </div>
+                    </div>
+                    <div class="glass-card p-6 flex flex-col h-full">
+                        <h3 class="text-xl font-bold mb-2 purple-accent">Speech-to-Text System</h3>
+                        <p class="text-muted mb-4 text-sm flex-grow">Real-time Speech-to-Text system for accurate, low-latency transcription with optional streaming and offline Whisper support. Features microphone to markdown transcription in seconds.</p>
+                        <div class="flex flex-wrap gap-2 text-xs mb-4">
+                            <span class="bg-gray-700 px-2 py-1 rounded">Python</span><span class="bg-gray-700 px-2 py-1 rounded">Whisper</span><span class="bg-gray-700 px-2 py-1 rounded">Speech Recognition</span><span class="bg-gray-700 px-2 py-1 rounded">Real-time</span>
+                        </div>
+                        <div class="flex justify-between items-center mt-auto">
+                            <a href="#" class="text-sm purple-accent font-semibold hover:underline">Live Demo</a><a href="https://github.com/MLNomad-man/Speech-to-text-using-Python" class="text-sm text-muted hover:underline">View Code →</a>
+                        </div>
+                    </div>
+                    <div class="glass-card p-6 flex flex-col h-full">
+                        <h3 class="text-xl font-bold mb-2 purple-accent">Personal Portfolio Website</h3>
+                        <p class="text-muted mb-4 text-sm flex-grow">The very site you're on, this portfolio was built from scratch to demonstrate proficiency in modern frontend development, including React and responsive design with Tailwind CSS.</p>
+                        <div class="flex flex-wrap gap-2 text-xs mb-4">
+                            <span class="bg-gray-700 px-2 py-1 rounded">React</span><span class="bg-gray-700 px-2 py-1 rounded">Tailwind CSS</span><span class="bg-gray-700 px-2 py-1 rounded">JavaScript</span>
+                        </div>
+                        <div class="flex justify-between items-center mt-auto">
+                            <a href="#" class="text-sm purple-accent font-semibold hover:underline">Live Demo</a><a href="https://github.com/MLNomad-man/my-portfolio-2025" class="text-sm text-muted hover:underline">View Code →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="demos" class="py-20 section-bg">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-10">
+                    <h2 class="text-4xl font-bold section-title scroll-reveal visible">Project Demonstrations</h2>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 stagger-reveal">
+                    <!-- AI Voice Assistant Demo -->
+                    <div class="glass-card p-6">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="p-2 bg-blue-500/20 rounded-lg"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-blue-400"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg></div>
+                            <div>
+                                <h3 class="text-xl font-bold">AI Voice Assistant</h3>
+                                <p class="text-sm text-muted">Python • Speech Recognition • NLP</p>
+                            </div>
+                        </div>
+                        <video controls class="w-full rounded-lg mb-4">
+                            <source src="./ai%20assistant.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <p class="text-sm text-muted mb-4">Watch the AI Assistant in action, demonstrating speech recognition, natural language processing, and automated task execution.</p>
+                        <div class="flex flex-wrap gap-x-4 gap-y-2 text-sm">
+                            <span class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-purple-400"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>Voice Commands</span>
+                            <span class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-purple-400"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>Task Automation</span>
+                            <span class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-purple-400"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"/></svg>Natural Language</span>
+                        </div>
+                    </div>
+                    <!-- Sign Language Detection Demo -->
+                    <div class="glass-card green-glass-card p-6">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="p-2 bg-green-500/20 rounded-lg"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-green-400"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                            <div>
+                                <h3 class="text-xl font-bold">Sign Language Detection</h3>
+                                <p class="text-sm text-muted">YOLO • Computer Vision • OpenCV</p>
+                            </div>
+                        </div>
+                        <video controls class="w-full rounded-lg mb-4">
+                            <source src="./sign%20language.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <p class="text-sm text-muted mb-4">Experience real-time sign language recognition using YOLO, showcasing computer vision and machine learning capabilities.</p>
+                         <div class="flex flex-wrap gap-x-4 gap-y-2 text-sm">
+                            <span class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-green-400"></div>Real-time Detection</span>
+                            <span class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-green-400"></div>YOLO Model</span>
+                            <span class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-green-400"></div>Computer Vision</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="certifications" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-10">
+                    <h2 class="text-4xl font-bold section-title scroll-reveal visible">Certifications & Accomplishments</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto stagger-reveal">
+                    <div class="glass-card p-8 text-center">
+                        <h3 class="text-xl font-bold text-cyan-400">Machine Learning Certification</h3>
+                        <p class="text-muted mt-2">Codesoft</p>
+                    </div>
+                    <div class="glass-card p-8 text-center">
+                        <h3 class="text-xl font-bold text-pink-400">Python Coding Certification</h3>
+                        <p class="text-muted mt-2">Internpe</p>
+                    </div>
+                    <div class="glass-card p-8 text-center">
+                        <h3 class="text-xl font-bold text-yellow-400">Google Cloud Skill Boost Badges</h3>
+                        <p class="text-muted mt-2">Google Cloud</p>
+                    </div>
+                    <div class="glass-card p-8 text-center">
+                        <h3 class="text-xl font-bold text-green-400">Conference & Hackathon</h3>
+                        <p class="text-muted mt-2">Participation</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-20 section-bg">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <div class="text-center mb-10">
+                    <h2 class="text-4xl font-bold section-title scroll-reveal visible">Get In Touch</h2>
+                </div>
+                <p class="text-center text-lg mb-10 scroll-reveal text-muted">Have a question or want to work together? Feel free to reach out.</p>
+                <div class="glass-card p-8 md:p-12 scroll-reveal">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-12">
+                        <div class="flex items-center gap-4">
+                            <div class="p-3 rounded-lg bg-purple-500 bg-opacity-20">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone purple-accent"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Phone</h4>
+                                <span class="text-muted">+91-8639961862</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="p-3 rounded-lg bg-teal-500 bg-opacity-20">
+                               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail text-teal-400"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 194 0 0 1-2.06 0L2 7"/></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Email</h4>
+                                <span class="text-muted">mdmeraj3500@gmail.com</span>
+                            </div>
+                        </div>
+                        <a href="https://www.linkedin.com/in/mdmeraj05/" target="_blank" class="flex items-center gap-4 group">
+                            <div class="p-3 rounded-lg bg-blue-500 bg-opacity-20">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-400"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">LinkedIn</h4>
+                                <span class="text-muted group-hover:purple-accent transition">mdmeraj05</span>
+                            </div>
+                        </a>
+                        <a href="https://github.com/MLNomad-man" target="_blank" class="flex items-center gap-4 group">
+                            <div class="p-3 rounded-lg bg-gray-500 bg-opacity-20">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-300"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">GitHub</h4>
+                                <span class="text-muted group-hover:purple-accent transition">MLNomad-man</span>
+                            </div>
+                        </a>
+                    </div>
+                    <form id="contact-form" action="#" method="POST">
+                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="name" class="block mb-2 text-sm">Name</label>
+                                <input type="text" id="name" name="name" placeholder="Your name" class="w-full bg-gray-900 bg-opacity-50 border border-gray-600 rounded-lg py-2 px-3 focus:outline-none focus:border-purple-500 transition-colors" required>
+                            </div>
+                            <div>
+                                <label for="email" class="block mb-2 text-sm">Email</label>
+                                <input type="email" id="email" name="email" placeholder="your.email@example.com" class="w-full bg-gray-900 bg-opacity-50 border border-gray-600 rounded-lg py-2 px-3 focus:outline-none focus:border-purple-500 transition-colors" required>
+                            </div>
+                        </div>
+                        <div class="mb-6">
+                            <label for="message" class="block mb-2 text-sm">Message</label>
+                            <textarea id="message" name="message" rows="4" placeholder="Your message here..." class="w-full bg-gray-900 bg-opacity-50 border border-gray-600 rounded-lg py-2 px-3 focus:outline-none focus:border-purple-500 transition-colors" required></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" id="send-button" class="bordered-button">Send Message</button>
+                            <div id="loading-indicator" class="hidden mt-4 text-purple-400">Sending message...</div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-black py-6">
+        <div class="container mx-auto px-6 text-center text-muted">
+            <p>&copy; 2025 MD Meraj Ansari. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Check if EmailJS is properly loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            // Blob background doesn't require JavaScript initialization
+            if (typeof emailjs === 'undefined') {
+                console.error('EmailJS not loaded properly');
+            } else {
+                console.log('EmailJS loaded successfully');
+                // Initialize EmailJS with your public key
+                emailjs.init("ivC29C05oGa_-xVq6");
+                console.log('EmailJS initialized successfully');
+            }
+            
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            const mobileNavLinks = document.querySelectorAll('#mobile-menu a');
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // Contact form submission
+            const contactForm = document.querySelector('#contact form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Show loading indicator and disable button
+                    const sendButton = document.getElementById('send-button');
+                    const loadingIndicator = document.getElementById('loading-indicator');
+                    
+                    sendButton.disabled = true;
+                    sendButton.classList.add('opacity-50', 'cursor-not-allowed');
+                    loadingIndicator.classList.remove('hidden');
+                    
+                    // Get form data
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const message = document.getElementById('message').value;
+                    
+                    // Validate form data
+                    if (!name || !email || !message) {
+                        alert('Please fill in all fields.');
+                        sendButton.disabled = false;
+                        sendButton.classList.remove('opacity-50', 'cursor-not-allowed');
+                        loadingIndicator.classList.add('hidden');
+                        return;
+                    }
+                    
+                    // Validate email format
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(email)) {
+                        alert('Please enter a valid email address.');
+                        sendButton.disabled = false;
+                        sendButton.classList.remove('opacity-50', 'cursor-not-allowed');
+                        loadingIndicator.classList.add('hidden');
+                        return;
+                    }
+                    
+                    // Prepare template parameters
+                    const templateParams = {
+                        from_name: name,
+                        from_email: email,
+                        reply_to: email,  // This ensures replies go to the sender
+                        message: message,
+                        to_name: 'Md Meraj Ansari',
+                        sender_email: email  // Additional parameter to make sender email clear
+                    };
+                    
+                    // Log the parameters for debugging
+                    console.log('Sending email with parameters:', templateParams);
+                    
+                    // Send email using EmailJS
+                    console.log('Attempting to send email with service:', 'service_pg7x16j', 'template:', 'template_aq6dcae');
+                    emailjs.send('service_pg7x16j', 'template_aq6dcae', templateParams)
+                        .then(function(response) {
+                            console.log('SUCCESS!', response.status, response.text);
+                            alert('Message sent successfully! You will receive a copy at your email address shortly.');
+                            contactForm.reset();
+                            // Change button text and style to indicate success
+                            sendButton.textContent = 'Message Sent!';
+                            sendButton.classList.remove('bordered-button');
+                            sendButton.classList.add('bg-green-500', 'text-white', 'font-bold');
+                            // Reset button text and style after 3 seconds
+                            setTimeout(function() {
+                                sendButton.textContent = 'Send Message';
+                                sendButton.classList.remove('bg-green-500', 'text-white', 'font-bold');
+                                sendButton.classList.add('bordered-button');
+                            }, 3000);
+                        }, function(error) {
+                            console.log('FAILED...', error);
+                            console.log('Error details:', {
+                                status: error.status,
+                                text: error.text,
+                                statusCode: error.statusCode
+                            });
+                            // More detailed error message
+                            alert('Failed to send message. Please make sure you have an internet connection and try again.');
+                            // Reset button text and style on error
+                            sendButton.textContent = 'Send Message';
+                            sendButton.classList.remove('bg-green-500', 'text-white', 'font-bold');
+                            sendButton.classList.add('bordered-button');
+                        })
+                        .finally(function() {
+                            // Hide loading indicator and re-enable button
+                            sendButton.disabled = false;
+                            sendButton.classList.remove('opacity-50', 'cursor-not-allowed');
+                            loadingIndicator.classList.add('hidden');
+                        });
+                });
+            }
+
+            // Intersection Observer for animations
+            const animationObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.scroll-reveal, .stagger-reveal').forEach(el => {
+                animationObserver.observe(el);
+            });
+
+            const skillsSection = document.getElementById('skills');
+            const progressObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        document.querySelectorAll('.progress-value').forEach(bar => {
+                            bar.style.width = bar.dataset.width;
+                        });
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.25 });
+
+            if (skillsSection) {
+                progressObserver.observe(skillsSection);
+            }
+            
+            // Theme switcher logic
+            const themeToggle = document.getElementById('theme-toggle');
+            const sunIcon = document.getElementById('sun-icon');
+            const moonIcon = document.getElementById('moon-icon');
+            const html = document.documentElement;
+
+            const applyTheme = (theme) => {
+                if (theme === 'light') {
+                    html.classList.add('light');
+                    sunIcon.classList.remove('hidden');
+                    moonIcon.classList.add('hidden');
+                } else {
+                    html.classList.remove('light');
+                    sunIcon.classList.add('hidden');
+                    moonIcon.classList.remove('hidden');
+                }
+            };
+
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = html.classList.contains('light') ? 'light' : 'dark';
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                localStorage.setItem('theme', newTheme);
+                applyTheme(newTheme);
+            });
+            
+            // Apply saved theme on load
+            const savedTheme = localStorage.getItem('theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+            if (savedTheme) {
+                applyTheme(savedTheme);
+            } else if (systemPrefersDark) {
+                applyTheme('dark');
+            } else {
+                applyTheme('light');
+            }
+        });
+    </script>
+    
+    <!-- Image Modal -->
+    <div id="imageModal" class="image-modal">
+        <span class="close-modal" id="closeModal">&times;</span>
+        <img class="modal-content" id="modalImage">
+        <div class="back-button" id="backButton">Go Back</div>
+    </div>
+    
+    <script>
+        // Image modal functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const closeModal = document.getElementById('closeModal');
+            const backButton = document.getElementById('backButton');
+
+            // Function to open modal with image
+            const openModal = function(imageSrc) {
+                modal.style.display = "block";
+                modalImg.src = imageSrc;
+            };
+
+            // When images are clicked, open the modal
+            const clickImages = document.querySelectorAll('.profile-image, .cursor-pointer');
+            clickImages.forEach(function(image) {
+                image.onclick = function() {
+                    openModal(this.src);
+                };
+            });
+
+            // When the close button (x) is clicked, close the modal
+            closeModal.onclick = function() {
+                modal.style.display = "none";
+            }
+
+            // When the back button is clicked, close the modal
+            backButton.onclick = function() {
+                modal.style.display = "none";
+            }
+
+            // When clicking anywhere outside the image, close the modal
+            modal.onclick = function(event) {
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            }
+        });
+    </script>
+</body>
+</html>
