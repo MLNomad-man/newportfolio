@@ -1,0 +1,150 @@
+@import "tailwindcss";
+
+:root {
+  --bg-color: #030014;
+  --text-color: #F8FAFC;
+  --text-muted-color: #94A3B8;
+  --card-bg: rgba(15, 23, 42, 0.5);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --neon-cyan: #06b6d4;
+  --neon-purple: #a855f7;
+  --neon-fuchsia: #d946ef;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  overflow-x: hidden;
+}
+
+/* Promote Vanta WebGL canvas to its own GPU compositor layer.
+   This stops the 3D rendering from causing repaints on every scroll frame. */
+[class*="fixed"].-z-20 {
+  will-change: transform;
+  transform: translateZ(0);
+  contain: strict;
+}
+
+/* Base custom classes */
+.text-muted { color: var(--text-muted-color); }
+.text-primary { color: var(--text-color); }
+
+/* Animated Mesh Background */
+.mesh-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background: radial-gradient(circle at 15% 50%, rgba(168, 85, 247, 0.15), transparent 30%),
+              radial-gradient(circle at 85% 30%, rgba(6, 182, 212, 0.15), transparent 30%);
+  animation: mesh-move 15s ease-in-out infinite alternate;
+}
+
+@keyframes mesh-move {
+  0% { transform: scale(1.0) translate(0, 0); }
+  50% { transform: scale(1.1) translate(-2%, 2%); }
+  100% { transform: scale(1.0) translate(2%, -2%); }
+}
+
+/* Noise overlay */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* UI Cards (Optimized for WebGL backgrounds) */
+.glass-card {
+  background: rgba(10, 15, 25, 0.85); /* Solidified opacity to avoid blur lag */
+  border-radius: 1rem;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.glass-card:hover {
+  border-color: rgba(168, 85, 247, 0.4);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 40px rgba(168, 85, 247, 0.15);
+}
+
+.section-title {
+  background: linear-gradient(to right, #a855f7, #06b6d4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-color); }
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--neon-purple); }
+
+/* Input fields */
+.contact-input {
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+.contact-input:focus {
+  outline: none;
+  border-color: var(--neon-cyan);
+  background-color: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 15px rgba(6, 182, 212, 0.2);
+}
+
+/* Fix Chrome/Browser autofill white background override */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px #030014 inset !important;
+  -webkit-text-fill-color: #F8FAFC !important;
+  caret-color: #F8FAFC;
+  transition: background-color 5000s ease-in-out 0s;
+  border-color: var(--border-color) !important;
+}
+
+/* Header link effects */
+.nav-link {
+  position: relative;
+  transition: color 0.3s ease;
+  font-weight: 500;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, var(--neon-purple), var(--neon-cyan));
+  transition: width 0.3s ease;
+}
+.nav-link:hover { color: #fff; }
+.nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+/* Accents */
+.purple-accent { color: var(--neon-purple); }
+.text-gradient {
+  background: linear-gradient(90deg, #d946ef, #06b6d4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
