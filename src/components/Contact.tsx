@@ -129,7 +129,7 @@ export default function Contact() {
                   <p className="text-slate-500 text-xs uppercase tracking-widest font-medium mb-3">Scan to visit</p>
                   <div className="bg-white p-3 rounded-xl inline-block">
                     <QRCodeSVG 
-                      value="https://mdmerajansari.vercel.app" 
+                      value="https://newmainportfolio.vercel.app" 
                       size={100}
                       bgColor="#ffffff"
                       fgColor="#030014"
